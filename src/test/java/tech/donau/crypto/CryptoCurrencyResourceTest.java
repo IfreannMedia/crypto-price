@@ -10,12 +10,14 @@ import static org.hamcrest.CoreMatchers.is;
 public class CryptoCurrencyResourceTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testGetCurrencyByIdEndpoint() {
         given()
-          .when().get("/crypto")
-          .then()
-             .statusCode(200)
-             .body(is("hello"));
+                .when().get("/crypto?id=1")
+                .then()
+                .statusCode(200)
+                .body("$.size()", is(1),
+                        "[0].id", is("1"),
+                        "[0].name", is("Litecoin"));
     }
 
 }
